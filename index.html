@@ -80,9 +80,12 @@ button:active {
 <body>
 
 <!-- Background Music -->
-<audio autoplay loop>
+<button id="startBtn">Tap to Begin ❤️</button>
+
+<audio id="bgMusic" loop>
   <source src="tu-chahiye.mp3" type="audio/mpeg">
 </audio>
+
 
 <!-- Butterflies -->
 <div class="butterfly" style="left:10%; animation-delay:0s;"></div>
@@ -159,7 +162,22 @@ function next(answer) {
     `;
   }
 }
+  <script>
+  const btn = document.getElementById("startBtn");
+  const music = document.getElementById("bgMusic");
+
+  btn.addEventListener("click", () => {
+    music.play();
+    btn.style.display = "none";
+
+    document.body.innerHTML += `
+      <h2 style="text-align:center; color:white; margin-top:20px;">
+        💖 Surprise loading for Ashmita 💖
+      </h2>
+    `;
+  });
 </script>
+
 
 </body>
 </html>
