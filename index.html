@@ -1,149 +1,225 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Happy New Year Ashmita ❤️</title>
+<title>Happy New Year Ashmita 💖</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-/* ===== BODY ===== */
-body {
-  margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(135deg, #ffd1dc, #ffb6c1);
-  overflow: hidden;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: 'Segoe UI', sans-serif;
 }
 
-/* ===== RAIN EFFECT ===== */
-.rain {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
+body{
+    height:100vh;
+    overflow:hidden;
+    background: linear-gradient(135deg, #ffd1dc, #ff9ebc);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:#fff;
 }
 
-.drop {
-  position: absolute;
-  bottom: 100%;
-  width: 2px;
-  height: 20px;
-  background: rgba(255,255,255,0.6);
-  animation: fall linear infinite;
+/* MAIN CARD */
+.card{
+    background: rgba(255,255,255,0.2);
+    padding:30px;
+    border-radius:20px;
+    text-align:center;
+    width:90%;
+    max-width:400px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.2);
+    position:relative;
+    z-index:2;
 }
 
-@keyframes fall {
-  to {
-    transform: translateY(120vh);
-  }
+/* TITLE */
+h1{
+    font-size:32px;
+    margin-bottom:10px;
+    animation: glow 2s infinite alternate;
 }
 
-/* ===== CARD ===== */
-.container {
-  position: relative;
-  z-index: 2;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+@keyframes glow{
+    from{ text-shadow:0 0 10px #fff; }
+    to{ text-shadow:0 0 25px #ff4d88; }
 }
 
-.card {
-  background: rgba(255, 255, 255, 0.25);
-  backdrop-filter: blur(10px);
-  border-radius: 20px;
-  padding: 30px;
-  text-align: center;
-  width: 85%;
-  max-width: 400px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+p{
+    font-size:18px;
+    margin:15px 0;
 }
 
-/* ===== TEXT ===== */
-h1 {
-  font-size: 28px;
-  color: #fff;
-  margin-bottom: 10px;
+/* BUTTON */
+button{
+    padding:12px 25px;
+    border:none;
+    border-radius:30px;
+    background:#fff;
+    color:#ff4d88;
+    font-size:18px;
+    cursor:pointer;
+    transition:0.3s;
 }
 
-h1 span {
-  display: block;
-  font-size: 36px;
-  font-weight: bold;
+button:hover{
+    transform:scale(1.1);
 }
 
-p {
-  color: #fff;
-  font-size: 16px;
+/* QUESTIONS */
+.option{
+    display:block;
+    margin:10px auto;
+    padding:10px;
+    background:#fff;
+    color:#ff4d88;
+    border-radius:20px;
+    width:80%;
+    cursor:pointer;
 }
 
-/* ===== BUTTON ===== */
-button {
-  margin-top: 20px;
-  padding: 12px 30px;
-  border: none;
-  border-radius: 25px;
-  font-size: 16px;
-  background: #fff;
-  color: #ff5c8a;
-  cursor: pointer;
-  font-weight: bold;
-  transition: 0.3s;
+/* RAIN */
+.rain{
+    position:absolute;
+    top:-100px;
+    width:2px;
+    height:80px;
+    background:rgba(255,255,255,0.6);
+    animation: rain 2s linear infinite;
 }
 
-button:hover {
-  transform: scale(1.05);
+@keyframes rain{
+    to{
+        transform:translateY(110vh);
+    }
 }
 
-/* ===== SECOND SCREEN ===== */
-#next {
-  display: none;
+/* BUTTERFLY */
+.butterfly{
+    position:absolute;
+    font-size:30px;
+    animation: fly 12s linear infinite;
 }
+
+@keyframes fly{
+    from{ transform:translateX(-50px) translateY(100vh); }
+    to{ transform:translateX(110vw) translateY(-100px); }
+}
+
+/* FIREWORK */
+.firework{
+    position:absolute;
+    width:6px;
+    height:6px;
+    background:#fff;
+    border-radius:50%;
+    animation: boom 1.5s ease-out infinite;
+}
+
+@keyframes boom{
+    0%{ transform:scale(1); opacity:1;}
+    100%{ transform:scale(10); opacity:0;}
+}
+
 </style>
 </head>
 
 <body>
 
-<!-- Rain -->
-<div class="rain" id="rain"></div>
-
-<!-- Content -->
-<div class="container">
-  <div class="card" id="first">
-    <h1>✨ Happy New Year ✨<span>Ashmita ❤️</span></h1>
+<div class="card" id="screen">
+    <h1>✨ Happy New Year Ashmita ✨</h1>
     <p>
-      Is naye saal mein<br>
-      main tumhe dil se khush dekhna chahta hoon 💖
+        Is naye saal p<br>
+        tumhare liye ek chhota sa surprise 💕
     </p>
     <button onclick="start()">Tap to Begin 💌</button>
-  </div>
-
-  <div class="card" id="next">
-    <h1>💞 2025 💞</h1>
-    <p>
-      Tum meri zindagi ka<br>
-      sabse khoobsurat hissa ho 🌸<br><br>
-      — Yours, Kushay ❤️
-    </p>
-  </div>
 </div>
 
 <script>
-/* BUTTON ACTION */
-function start() {
-  document.getElementById("first").style.display = "none";
-  document.getElementById("next").style.display = "block";
+/* RAIN CREATION */
+for(let i=0;i<60;i++){
+    let rain=document.createElement("div");
+    rain.className="rain";
+    rain.style.left=Math.random()*100+"vw";
+    rain.style.animationDuration=(1+Math.random()*2)+"s";
+    document.body.appendChild(rain);
 }
 
-/* RAIN GENERATOR */
-const rain = document.getElementById("rain");
+/* BUTTERFLIES */
+for(let i=0;i<6;i++){
+    let b=document.createElement("div");
+    b.className="butterfly";
+    b.innerHTML="🦋";
+    b.style.left=Math.random()*100+"vw";
+    b.style.animationDuration=(8+Math.random()*5)+"s";
+    document.body.appendChild(b);
+}
 
-for (let i = 0; i < 100; i++) {
-  const drop = document.createElement("div");
-  drop.className = "drop";
-  drop.style.left = Math.random() * 100 + "vw";
-  drop.style.animationDuration = (0.5 + Math.random()) + "s";
-  drop.style.opacity = Math.random();
-  rain.appendChild(drop);
+/* FIREWORKS */
+setInterval(()=>{
+    let f=document.createElement("div");
+    f.className="firework";
+    f.style.left=Math.random()*100+"vw";
+    f.style.top=Math.random()*50+"vh";
+    document.body.appendChild(f);
+    setTimeout(()=>f.remove(),1500);
+},800);
+
+/* QUESTIONS */
+let q=0;
+let questions=[
+    {
+        q:"Kya tum mere saath hamesha rahogi? 💖",
+        a1:"Haan 💕",
+        a2:"Bilkul 😘"
+    },
+    {
+        q:"Is saal hum aur zyada memories banaye? ✨",
+        a1:"Yes 🥰",
+        a2:"Definitely 💞"
+    },
+    { 
+         q:"kya m is duniya ka sabse best boyfriend hu? 🤭",
+         a1:"yes you are the beat🤭",
+         a2:"ye bhi koi puchne wali baat h, obviously yess😘",
+    },
+    {
+        q:"Kya ye surprise pasand aaya? 💝",
+        a1:"Bahut zyada 😍",
+        a2:"Dil se ❤️"
+    }
+];
+
+function start(){
+    showQuestion();
+}
+
+function showQuestion(){
+    let screen=document.getElementById("screen");
+    if(q>=questions.length){
+        screen.innerHTML=`
+            <h1>💖 Thank You for being in my life 💖</h1>
+            <p>
+                Tum meri zindagi ka sabse khoobsurat hissa ho 🌸<br>
+                Happy New Year ❤️
+            </p>
+        `;
+        return;
+    }
+
+    screen.innerHTML=`
+        <h1>${questions[q].q}</h1>
+        <div class="option" onclick="next()">${questions[q].a1}</div>
+        <div class="option" onclick="next()">${questions[q].a2}</div>
+    `;
+}
+
+function next(){
+    q++;
+    showQuestion();
 }
 </script>
 
