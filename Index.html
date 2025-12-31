@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy New Year Ashmita ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #ff4d6d, #ff9a9e);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+}
+.card {
+  background: rgba(0,0,0,0.35);
+  padding: 28px;
+  border-radius: 22px;
+  max-width: 360px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.3);
+}
+button {
+  background: #fff;
+  color: #ff2e63;
+  border: none;
+  padding: 12px 22px;
+  border-radius: 30px;
+  font-size: 16px;
+  margin-top: 20px;
+  cursor: pointer;
+}
+button:active {
+  transform: scale(0.95);
+}
+</style>
+</head>
+<body>
+
+<!-- Background Music -->
+<audio id="song" loop>
+  <source src="https://docs.google.com/uc?export=download&id=1n0U0l0o6oJTuChahiyeDemo" type="audio/mpeg">
+</audio>
+
+<div class="card" id="content">
+  <h2>🎆 Happy New Year Ashmita ❤️</h2>
+  <p>
+    Is naye saal ki shuruaat<br>
+    meri zindagi ki sabse khoobsurat ladki ke saath 💖
+    <br><br>
+    <b>— Tum ❤️</b>
+  </p>
+  <button onclick="start()">Tap to Open 💌</button>
+</div>
+
+<script>
+let step = 0;
+const content = document.getElementById("content");
+const song = document.getElementById("song");
+
+function start(){
+  song.play();
+  next();
+}
+
+function next() {
+  step++;
+
+  if(step === 1){
+    content.innerHTML = `
+    <h2>💌 Question 1</h2>
+    <p>
+      Ashmita…<br>
+      kya tumhe yaad hai jab hum pehli baar close hue the? 🥺❤️
+    </p>
+    <button onclick="next()">Haan 😘</button>
+    `;
+  }
+
+  else if(step === 2){
+    content.innerHTML = `
+    <h2>💖 Question 2</h2>
+    <p>
+      Kya main tumhari zindagi ka<br>
+      woh insaan hoon jo tumhe hamesha muskuraata dekhna chahta hai? 🌹
+    </p>
+    <button onclick="next()">Bilkul ❤️</button>
+    `;
+  }
+
+  else if(step === 3){
+    content.innerHTML = `
+    <h2>😍 Question 3</h2>
+    <p>
+      Kya tum 2025 aur aane wale har saal<br>
+      mera haath pakad kar chalogi? ✨🤍
+    </p>
+    <button onclick="next()">Hamesha 🤞</button>
+    `;
+  }
+
+  else {
+    content.innerHTML = `
+    <h2>🎁 My Surprise for You</h2>
+    <p>
+      Ashmita ❤️<br><br>
+      Tum meri zindagi ka sabse pyaara chapter ho.<br>
+      Tumhari ek muskaan meri saari thakaan mita deti hai 🥹
+      <br><br>
+      Is naye saal main tumse sirf ek wada karta hoon:
+      <br><br>
+      🌹 Tumhari respect<br>
+      🌹 Tumhara saath<br>
+      🌹 Aur beintehaa pyaar
+      <br><br>
+      <b>
+      Happy New Year My Love 🎆<br>
+      — Tumhara Kushay ❤️
+      </b>
+    </p>
+    `;
+  }
+}
+</script>
+
+</body>
+</html>
