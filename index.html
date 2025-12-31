@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -6,179 +6,146 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
+/* ===== BODY ===== */
 body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(135deg, #ff4d6d, #ff9a9e);
-  color: white;
-  height: 100vh;
+  background: linear-gradient(135deg, #ffd1dc, #ffb6c1);
   overflow: hidden;
 }
 
-/* Card */
-.card {
+/* ===== RAIN EFFECT ===== */
+.rain {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.drop {
+  position: absolute;
+  bottom: 100%;
+  width: 2px;
+  height: 20px;
+  background: rgba(255,255,255,0.6);
+  animation: fall linear infinite;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(120vh);
+  }
+}
+
+/* ===== CARD ===== */
+.container {
   position: relative;
   z-index: 2;
-  background: rgba(0,0,0,0.4);
-  padding: 28px;
-  border-radius: 22px;
-  max-width: 360px;
-  margin: auto;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 30px;
   text-align: center;
-  top: 50%;
-  transform: translateY(-50%);
+  width: 85%;
+  max-width: 400px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
 }
 
-/* Buttons */
+/* ===== TEXT ===== */
+h1 {
+  font-size: 28px;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+h1 span {
+  display: block;
+  font-size: 36px;
+  font-weight: bold;
+}
+
+p {
+  color: #fff;
+  font-size: 16px;
+}
+
+/* ===== BUTTON ===== */
 button {
-  background: white;
-  color: #ff2e63;
+  margin-top: 20px;
+  padding: 12px 30px;
   border: none;
-  padding: 12px 18px;
-  border-radius: 30px;
-  font-size: 15px;
-  margin: 10px;
+  border-radius: 25px;
+  font-size: 16px;
+  background: #fff;
+  color: #ff5c8a;
   cursor: pointer;
-}
-button:active {
-  transform: scale(0.95);
-}
-
-/* Butterflies */
-.butterfly {
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  background: pink;
-  border-radius: 50% 50% 0 50%;
-  transform: rotate(45deg);
-  animation: fly 15s linear infinite;
-  opacity: 0.7;
-}
-.butterfly::after {
-  content: '';
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  background: pink;
-  border-radius: 50% 50% 50% 0;
-  left: -10px;
-  top: 10px;
+  font-weight: bold;
+  transition: 0.3s;
 }
 
-@keyframes fly {
-  from {
-    transform: translateY(110vh) translateX(0) rotate(45deg);
-  }
-  to {
-    transform: translateY(-10vh) translateX(200px) rotate(45deg);
-  }
+button:hover {
+  transform: scale(1.05);
+}
+
+/* ===== SECOND SCREEN ===== */
+#next {
+  display: none;
 }
 </style>
 </head>
 
 <body>
 
-<!-- Background Music -->
-<button id="startBtn">Tap to Begin ❤️</button>
+<!-- Rain -->
+<div class="rain" id="rain"></div>
 
-<audio id="bgMusic" loop>
-  <source src="tu-chahiye.mp3" type="audio/mpeg">
-</audio>
+<!-- Content -->
+<div class="container">
+  <div class="card" id="first">
+    <h1>✨ Happy New Year ✨<span>Ashmita ❤️</span></h1>
+    <p>
+      Is naye saal mein<br>
+      main tumhe dil se khush dekhna chahta hoon 💖
+    </p>
+    <button onclick="start()">Tap to Begin 💌</button>
+  </div>
 
-
-<!-- Butterflies -->
-<div class="butterfly" style="left:10%; animation-delay:0s;"></div>
-<div class="butterfly" style="left:40%; animation-delay:3s;"></div>
-<div class="butterfly" style="left:70%; animation-delay:6s;"></div>
-
-<div class="card" id="content">
-  <h2>🎆 Happy New Year Ashmita ❤️</h2>
-  <p>
-    Is naye saal ki shuruaat<br>
-    meri zindagi ki sabse khoobsurat wajah ke saath 💖
-  </p>
-  <button onclick="start()">Tap to Open 💌</button>
+  <div class="card" id="next">
+    <h1>💞 2025 💞</h1>
+    <p>
+      Tum meri zindagi ka<br>
+      sabse khoobsurat hissa ho 🌸<br><br>
+      — Yours, Kushay ❤️
+    </p>
+  </div>
 </div>
 
 <script>
-let step = 0;
-const content = document.getElementById("content");
-const bgm = document.getElementById("bgm");
-
+/* BUTTON ACTION */
 function start() {
-  bgm.play();
-  next();
+  document.getElementById("first").style.display = "none";
+  document.getElementById("next").style.display = "block";
 }
 
-function next(answer) {
-  step++;
+/* RAIN GENERATOR */
+const rain = document.getElementById("rain");
 
-  if(step === 1){
-    content.innerHTML = `
-      <h3>💌 Question 1</h3>
-      <p>Ashmita, kya tumhe pata hai tum meri life me kya ho? 🥺❤️</p>
-      <button onclick="next()">Meri duniya 🌍</button>
-      <button onclick="next()">Mera pyaar 💖</button>
-    `;
-  }
-  else if(step === 2){
-    content.innerHTML = `
-      <h3>💖 Question 2</h3>
-      <p>Kya tum mere saath har khushi aur mushkil share karogi? 🤍</p>
-      <button onclick="next()">Hamesha 🤞</button>
-      <button onclick="next()">Bilkul 😘</button>
-    `;
-  }
-  else if(step === 3){
-    content.innerHTML = `
-      <h3>😍 Question 3</h3>
-      <p>Agar main kabhi thoda kamzor pad jaun, kya tum mera haath thamogi?</p>
-      <button onclick="next()">Kabhi nahi chhodungi ❤️</button>
-      <button onclick="next()">Main hoon na 🫶</button>
-    `;
-  }
-  else if(step === 4){
-    content.innerHTML = `
-      <h3>✨ Last Question</h3>
-      <p>Kya tum 2025 aur uske baad ke har saal meri ban kar rahogi? 🌹</p>
-      <button onclick="next()">Haan ❤️</button>
-      <button onclick="next()">Sirf tumhari 🤍</button>
-    `;
-  }
-  else {
-    content.innerHTML = `
-      <h2>🎁 My Surprise</h2>
-      <p>
-        Ashmita ❤️<br><br>
-        Tum meri zindagi ka sabse khoobsurat ehsaas ho.<br>
-        Har dua, har khushi, har sapna — sab tumse shuru hota hai.
-        <br><br>
-        Is naye saal aur hamesha ke liye…<br>
-        <b>I LOVE YOU SO MUCH 💖</b>
-        <br><br>
-        — Kushay ❤️
-      </p>
-    `;
-  }
+for (let i = 0; i < 100; i++) {
+  const drop = document.createElement("div");
+  drop.className = "drop";
+  drop.style.left = Math.random() * 100 + "vw";
+  drop.style.animationDuration = (0.5 + Math.random()) + "s";
+  drop.style.opacity = Math.random();
+  rain.appendChild(drop);
 }
-  <script>
-  const btn = document.getElementById("startBtn");
-  const music = document.getElementById("bgMusic");
-
-  btn.addEventListener("click", () => {
-    music.play();
-    btn.style.display = "none";
-
-    document.body.innerHTML += `
-      <h2 style="text-align:center; color:white; margin-top:20px;">
-        💖 Surprise loading for Ashmita 💖
-      </h2>
-    `;
-  });
 </script>
-
 
 </body>
 </html>
-
