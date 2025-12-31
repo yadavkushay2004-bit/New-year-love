@@ -4,33 +4,56 @@
 <meta charset="UTF-8">
 <title>Happy New Year Ashmita ❤️</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <style>
 body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
   background: linear-gradient(135deg, #ff4d6d, #ff9a9e);
+  overflow: hidden;
   color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  text-align: center;
 }
+
+/* Butterfly animation */
+.butterfly {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  background: url('https://i.imgur.com/7QZ6FQp.png') no-repeat center/contain;
+  animation: fly 15s linear infinite;
+  opacity: 0.8;
+}
+@keyframes fly {
+  0% { transform: translateY(100vh) translateX(0) rotate(0deg); }
+  100% { transform: translateY(-120vh) translateX(200px) rotate(360deg); }
+}
+
 .card {
+  position: relative;
+  z-index: 2;
   background: rgba(0,0,0,0.35);
   padding: 28px;
   border-radius: 22px;
   max-width: 360px;
-  box-shadow: 0 0 20px rgba(0,0,0,0.3);
+  margin: auto;
+  margin-top: 20vh;
+  text-align: center;
+  animation: fadeIn 1s ease;
 }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
 button {
-  background: #fff;
+  background: white;
   color: #ff2e63;
   border: none;
-  padding: 12px 22px;
+  padding: 10px 18px;
   border-radius: 30px;
-  font-size: 16px;
-  margin-top: 20px;
+  font-size: 15px;
+  margin: 10px;
   cursor: pointer;
 }
 button:active {
@@ -38,93 +61,33 @@ button:active {
 }
 </style>
 </head>
+
 <body>
 
-<!-- Background Music -->
-<audio id="song" loop>
-  <source src="https://docs.google.com/uc?export=download&id=1n0U0l0o6oJTuChahiyeDemo" type="audio/mpeg">
-</audio>
+<!-- Butterflies -->
+<div class="butterfly" style="left:10%; animation-delay:0s;"></div>
+<div class="butterfly" style="left:40%; animation-delay:3s;"></div>
+<div class="butterfly" style="left:70%; animation-delay:6s;"></div>
 
 <div class="card" id="content">
   <h2>🎆 Happy New Year Ashmita ❤️</h2>
   <p>
-    Is naye saal ki shuruaat<br>
-    meri zindagi ki sabse khoobsurat ladki ke saath 💖
-    <br><br>
-    <b>— Tum ❤️</b>
+    Is naye saal me<br>
+    main tumhe ek chhota sa dil se surprise dena chahta hoon 💖
   </p>
-  <button onclick="start()">Tap to Open 💌</button>
+  <button onclick="next()">Tap to Begin 💌</button>
 </div>
 
 <script>
 let step = 0;
 const content = document.getElementById("content");
-const song = document.getElementById("song");
 
-function start(){
-  song.play();
-  next();
-}
-
-function next() {
+function next(answer = "") {
   step++;
 
   if(step === 1){
     content.innerHTML = `
-    <h2>💌 Question 1</h2>
-    <p>
-      Ashmita…<br>
-      kya tumhe yaad hai jab hum pehli baar close hue the? 🥺❤️
-    </p>
-    <button onclick="next()">Haan 😘</button>
-    `;
-  }
+      <h3>💌 Question 1</h3>
+      <p>
+        Ashmita…<br>
 
-  else if(step === 2){
-    content.innerHTML = `
-    <h2>💖 Question 2</h2>
-    <p>
-      Kya main tumhari zindagi ka<br>
-      woh insaan hoon jo tumhe hamesha muskuraata dekhna chahta hai? 🌹
-    </p>
-    <button onclick="next()">Bilkul ❤️</button>
-    `;
-  }
-
-  else if(step === 3){
-    content.innerHTML = `
-    <h2>😍 Question 3</h2>
-    <p>
-      Kya tum 2025 aur aane wale har saal<br>
-      mera haath pakad kar chalogi? ✨🤍
-    </p>
-    <button onclick="next()">Hamesha 🤞</button>
-    `;
-  }
-
-  else {
-    content.innerHTML = `
-    <h2>🎁 My Surprise for You</h2>
-    <p>
-      Ashmita ❤️<br><br>
-      Tum meri zindagi ka sabse pyaara chapter ho.<br>
-      Tumhari ek muskaan meri saari thakaan mita deti hai 🥹
-      <br><br>
-      Is naye saal main tumse sirf ek wada karta hoon:
-      <br><br>
-      🌹 Tumhari respect<br>
-      🌹 Tumhara saath<br>
-      🌹 Aur beintehaa pyaar
-      <br><br>
-      <b>
-      Happy New Year My Love 🎆<br>
-      — Tumhara Kushay ❤️
-      </b>
-    </p>
-    `;
-  }
-}
-</script>
-
-</body>
-</html>
