@@ -10,47 +10,31 @@ body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
   background: linear-gradient(135deg, #ff4d6d, #ff9a9e);
-  overflow: hidden;
   color: white;
+  height: 100vh;
+  overflow: hidden;
 }
 
-/* Butterfly animation */
-.butterfly {
-  position: absolute;
-  width: 30px;
-  height: 30px;
-  background: url('https://i.imgur.com/7QZ6FQp.png') no-repeat center/contain;
-  animation: fly 15s linear infinite;
-  opacity: 0.8;
-}
-@keyframes fly {
-  0% { transform: translateY(100vh) translateX(0) rotate(0deg); }
-  100% { transform: translateY(-120vh) translateX(200px) rotate(360deg); }
-}
-
+/* Card */
 .card {
   position: relative;
   z-index: 2;
-  background: rgba(0,0,0,0.35);
+  background: rgba(0,0,0,0.4);
   padding: 28px;
   border-radius: 22px;
   max-width: 360px;
   margin: auto;
-  margin-top: 20vh;
   text-align: center;
-  animation: fadeIn 1s ease;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: scale(0.9); }
-  to { opacity: 1; transform: scale(1); }
-}
-
+/* Buttons */
 button {
   background: white;
   color: #ff2e63;
   border: none;
-  padding: 10px 18px;
+  padding: 12px 18px;
   border-radius: 30px;
   font-size: 15px;
   margin: 10px;
@@ -59,10 +43,46 @@ button {
 button:active {
   transform: scale(0.95);
 }
+
+/* Butterflies */
+.butterfly {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: pink;
+  border-radius: 50% 50% 0 50%;
+  transform: rotate(45deg);
+  animation: fly 15s linear infinite;
+  opacity: 0.7;
+}
+.butterfly::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: pink;
+  border-radius: 50% 50% 50% 0;
+  left: -10px;
+  top: 10px;
+}
+
+@keyframes fly {
+  from {
+    transform: translateY(110vh) translateX(0) rotate(45deg);
+  }
+  to {
+    transform: translateY(-10vh) translateX(200px) rotate(45deg);
+  }
+}
 </style>
 </head>
 
 <body>
+
+<!-- Background Music -->
+<audio autoplay loop>
+  <source src="tu-chahiye.mp3" type="audio/mpeg">
+</audio>
 
 <!-- Butterflies -->
 <div class="butterfly" style="left:10%; animation-delay:0s;"></div>
@@ -72,22 +92,75 @@ button:active {
 <div class="card" id="content">
   <h2>🎆 Happy New Year Ashmita ❤️</h2>
   <p>
-    Is naye saal me<br>
-    main tumhe ek chhota sa dil se surprise dena chahta hoon 💖
+    Is naye saal ki shuruaat<br>
+    meri zindagi ki sabse khoobsurat wajah ke saath 💖
   </p>
-  <button onclick="next()">Tap to Begin 💌</button>
+  <button onclick="start()">Tap to Open 💌</button>
 </div>
 
 <script>
 let step = 0;
 const content = document.getElementById("content");
+const bgm = document.getElementById("bgm");
 
-function next(answer = "") {
+function start() {
+  bgm.play();
+  next();
+}
+
+function next(answer) {
   step++;
 
   if(step === 1){
     content.innerHTML = `
       <h3>💌 Question 1</h3>
+      <p>Ashmita, kya tumhe pata hai tum meri life me kya ho? 🥺❤️</p>
+      <button onclick="next()">Meri duniya 🌍</button>
+      <button onclick="next()">Mera pyaar 💖</button>
+    `;
+  }
+  else if(step === 2){
+    content.innerHTML = `
+      <h3>💖 Question 2</h3>
+      <p>Kya tum mere saath har khushi aur mushkil share karogi? 🤍</p>
+      <button onclick="next()">Hamesha 🤞</button>
+      <button onclick="next()">Bilkul 😘</button>
+    `;
+  }
+  else if(step === 3){
+    content.innerHTML = `
+      <h3>😍 Question 3</h3>
+      <p>Agar main kabhi thoda kamzor pad jaun, kya tum mera haath thamogi?</p>
+      <button onclick="next()">Kabhi nahi chhodungi ❤️</button>
+      <button onclick="next()">Main hoon na 🫶</button>
+    `;
+  }
+  else if(step === 4){
+    content.innerHTML = `
+      <h3>✨ Last Question</h3>
+      <p>Kya tum 2025 aur uske baad ke har saal meri ban kar rahogi? 🌹</p>
+      <button onclick="next()">Haan ❤️</button>
+      <button onclick="next()">Sirf tumhari 🤍</button>
+    `;
+  }
+  else {
+    content.innerHTML = `
+      <h2>🎁 My Surprise</h2>
       <p>
-        Ashmita…<br>
+        Ashmita ❤️<br><br>
+        Tum meri zindagi ka sabse khoobsurat ehsaas ho.<br>
+        Har dua, har khushi, har sapna — sab tumse shuru hota hai.
+        <br><br>
+        Is naye saal aur hamesha ke liye…<br>
+        <b>I LOVE YOU SO MUCH 💖</b>
+        <br><br>
+        — Kushay ❤️
+      </p>
+    `;
+  }
+}
+</script>
+
+</body>
+</html>
 
